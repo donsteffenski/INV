@@ -1,1 +1,3 @@
 # Invoice Tracker
+
+This is a practice project, an Invoicing Helper App for Freelancers. Just for fun...
