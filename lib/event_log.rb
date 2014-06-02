@@ -1,6 +1,6 @@
 
 
-class WorkLog
+class EventLog
   
   attr_accessor :events
   

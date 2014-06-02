@@ -1,16 +1,14 @@
 require 'spec_helper'
-require 'work_log'
+require 'event_log'
 require 'event'
  
-describe WorkLog do
+describe EventLog do
   
-  context "Given an empty WorkLog" do
+  context "Given an empty EventLog" do
 
-    
     it { should be_empty }
     
     context "when an Event is created" do
-      
       before :each do
         @event = subject.create_event
       end
@@ -22,28 +20,25 @@ describe WorkLog do
       it { should_not be_empty }
        
     end
-
     
   end
  
-  context "Given a WorkLog with one Event" do
+  context "Given an EventLog with one Event" do
     
     before :all do
-      @work_log = WorkLog.new
-      @event1 = @work_log.create_event
+      @event_log = EventLog.new
+      @event1 = @event_log.create_event
     end
     
     context "when an Event is created" do
-      
       before :each do
-        @event2 = @work_log.create_event
+        @event2 = @event_log.create_event
       end
       
       it "should return an Array of Events" do
-        expect(@work_log.events).to be_a Array
-        @work_log.events.should include @event1, @event2
+        expect(@event_log.events).to be_a Array
+        expect(@event_log.events).to include @event1, @event2
       end
-      
       
     end
     
