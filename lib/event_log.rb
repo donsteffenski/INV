@@ -12,8 +12,8 @@ class EventLog
     @event.nil?
   end
   
-  def create_event
-    @event = Event.new
+  def create_event(params = {})
+    @event = Event.new(params)
     @events << @event
     @event
   end

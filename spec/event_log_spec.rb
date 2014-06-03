@@ -10,7 +10,7 @@ describe EventLog do
     
     context "when an Event is created" do
       before :each do
-        @event = subject.create_event
+        @event = subject.create_event(:title => "My Event")
       end
       
       it "should return an Event" do
@@ -30,18 +30,43 @@ describe EventLog do
       @event1 = @event_log.create_event
     end
     
-    context "when an Event is created" do
+    context "when another Event is created" do
+      
       before :each do
-        @event2 = @event_log.create_event
+        @event2 = @event_log.create_event 
       end
       
-      it "should return an Array of Events" do
-        expect(@event_log.events).to be_a Array
-        expect(@event_log.events).to include @event1, @event2
+      describe "calling the events method" do
+      
+        it "should return an Array of Events" do
+          expect(@event_log.events).to be_a Array
+          expect(@event_log.events).to include @event1, @event2
+        end
+        
       end
       
     end
     
   end
+  
+  describe "Event attributes" do
+    
+    context "Given an Eventlog with an Event with a title" do
+    
+      subject do
+        @event = EventLog.new.create_event(:title => "My first Event") 
+      end
+      
+      it { should be_an_instance_of Event }
+      
+      its(:title) { should == "My first Event" }
+    
+    end 
+          
+  end
+    
+
+  
+  
  
 end
