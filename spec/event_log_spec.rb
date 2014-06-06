@@ -18,8 +18,20 @@ describe EventLog do
       end
       
       it { should_not be_empty }
-       
+      
+      describe "when the Event is deleted" do
+      
+        before do 
+          subject.events.delete(@event)
+        end
+        
+        it { should be_empty }
+        
+      end
+      
     end
+    
+    
     
   end
  
@@ -51,22 +63,29 @@ describe EventLog do
   
   describe "Event attributes" do
     
-    context "Given an Eventlog with an Event with a title" do
+    context "Given an Eventlog with an Event with attributes" do
     
-      subject do
-        @event = EventLog.new.create_event(:title => "My first Event") 
+      before :each do
+        @event_log = EventLog.new
+        @event = @event_log.create_event(:title => "My first Event", :start_time => Time.now, :end_time => Time.now+3600, :description => "Some description") 
       end
+      
+      subject { @event }
       
       it { should be_an_instance_of Event }
       
       its(:title) { should == "My first Event" }
-    
+      
+      describe "when the Title is changed" do
+        
+        before { @event.title = "My changed Event" }
+        
+        its(:title) { should == "My changed Event"}
+        
+      end
+      
     end 
           
   end
     
-
-  
-  
- 
 end

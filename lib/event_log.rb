@@ -9,13 +9,17 @@ class EventLog
   end
   
   def empty?
-    @event.nil?
+    @events.empty?
   end
   
   def create_event(params = {})
     @event = Event.new(params)
     @events << @event
     @event
+  end
+  
+  def delete_event(event)
+    @events.delete(event)
   end
   
 end
